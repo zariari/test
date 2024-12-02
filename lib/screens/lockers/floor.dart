@@ -55,6 +55,9 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -71,19 +74,19 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 10), // Dynamic padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Text(
-                'Selecciona el Piso de ${widget.facultyName}',
-                style: const TextStyle(
-                  fontSize: 22,
+                'Facultad de ${widget.facultyName}',
+                style: TextStyle(
+                  fontSize: screenHeight * 0.03, // Dynamic font size
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -93,8 +96,8 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
             const SizedBox(height: 5),
             const Center(
               child: Text(
-                'Selecciona el piso donde quieres encontrar un locker',
-                style: TextStyle(fontSize: 14, color: Colors.black),
+                'Selecciona el piso',
+                style: TextStyle(fontSize: 18, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -116,7 +119,7 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
                             return FloorTile(
                               facultyName: widget.facultyName,
                               floorNumber: floor['floor_number'],
-                              floorId: floor['id'], // Pasar floorId desde la API
+                              floorId: floor['id'],
                             );
                           },
                         ),
@@ -143,8 +146,10 @@ class FloorTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 1),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1, vertical: 8), // Dynamic padding
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

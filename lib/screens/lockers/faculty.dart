@@ -86,6 +86,9 @@ class _FacultyScreenState extends State<FacultyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -102,11 +105,11 @@ class _FacultyScreenState extends State<FacultyScreen> {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 10), // Dynamic padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -118,14 +121,6 @@ class _FacultyScreenState extends State<FacultyScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
-              ),
-            ),
-            const SizedBox(height: 5),
-            const Center(
-              child: Text(
-                'Selecciona la facultad donde deseas reservar un locker',
-                style: TextStyle(fontSize: 14, color: Colors.black),
-                textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 20),

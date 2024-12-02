@@ -7,6 +7,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Column(
         children: [
@@ -21,16 +24,17 @@ class LoginPage extends StatelessWidget {
                         child: Image.asset(
                           'assets/images/upper_image.png',
                           fit: BoxFit.cover,
+                          height: screenHeight * 0.3, // Adjust height of the upper image as needed
                         ),
                       ),
                       Positioned(
-                        top: 60,
+                        top: screenHeight * 0.05, // Adjust this value to make the logo closer to the top edge
                         left: 0,
                         right: 0,
                         child: Center(
                           child: Image.asset(
                             'assets/images/logo.png',
-                            height: 130,
+                            height: screenHeight * 0.15, // Keep the same height for the logo
                           ),
                         ),
                       ),
@@ -38,7 +42,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50),
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 50), // Dynamic padding
                     child: Column(
                       children: [
                         const Text(
@@ -121,7 +125,7 @@ class LoginPage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF0a4c86),
-                            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1, vertical: 12), // Dynamic padding
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30),
                             ),
@@ -144,13 +148,14 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Stack(
-            alignment: Alignment.bottomCenter, 
+            alignment: Alignment.bottomCenter,
             children: [
               SizedBox(
                 width: double.infinity,
                 child: Image.asset(
                   'assets/images/lower_image.png',
                   fit: BoxFit.cover,
+                  height: screenHeight * 0.2, // Dynamic footer image size
                 ),
               ),
               Padding(

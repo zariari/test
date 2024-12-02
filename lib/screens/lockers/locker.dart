@@ -58,6 +58,9 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -74,11 +77,11 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 10), // Dynamic padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -93,20 +96,13 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
               ),
             ),
             const SizedBox(height: 5),
-            const Center(
-              child: Text(
-                'Selecciona el locker disponible que deseas reservar',
-                style: TextStyle(fontSize: 14, color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
-            ),
             const SizedBox(height: 20),
             Text(
               'Facultad de ${widget.facultyName}\n${widget.floorNumber}\n${widget.section}',
-              style: const TextStyle(
-                fontSize: 20,
+              style: TextStyle(
+                fontSize: screenHeight * 0.025, // Dynamically adjust font size
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0a4c86),
+                color: const Color(0xFF0a4c86),
               ),
               textAlign: TextAlign.center,
             ),
@@ -115,7 +111,11 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
                     child: GridView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding: EdgeInsets.only(
+                        left: screenWidth * 0.05, 
+                        right: screenWidth * 0.05,
+                        bottom: screenHeight * 0.02, // Reduce bottom padding to move the grid closer to the line
+                      ), // Dynamic padding
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
@@ -136,13 +136,34 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
             const SizedBox(height: 10),
             const Divider(color: Colors.black, thickness: 5),
             const SizedBox(height: 10),
-            const Text(
-              'Los lockers en verde están disponibles para su reserva, mientras que los lockers en gris ya están reservados.',
-              style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+            RichText(
               textAlign: TextAlign.center,
+              text: const TextSpan(
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: [
+                  TextSpan(
+                    text: 'Lockers en ',
+                  ),
+                  TextSpan(
+                    text: 'verde',
+                    style: TextStyle(color: Colors.green), // Green color for available lockers
+                  ),
+                  TextSpan(
+                    text: ' están disponibles \n Lockers en ',
+                  ),
+                  TextSpan(
+                    text: 'gris',
+                    style: TextStyle(color: Colors.grey), // Gray color for reserved lockers
+                  ),
+                  TextSpan(
+                    text: ' ya están reservados',
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 20),
           ],
@@ -167,6 +188,8 @@ class LockerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         if (isAvailable) {
@@ -193,10 +216,10 @@ class LockerTile extends StatelessWidget {
         child: Center(
           child: Text(
             '$lockerNumber',
-            style: const TextStyle(
-              fontSize: 26,
+            style: TextStyle(
+              fontSize: screenWidth * 0.065, // Dynamically adjust font size
               fontWeight: FontWeight.w900,
-              color: Color(0xFF0a4c86),
+              color: const Color(0xFF0a4c86),
             ),
           ),
         ),

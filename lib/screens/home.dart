@@ -27,7 +27,7 @@ class LockerReservationPage extends StatelessWidget {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: SingleChildScrollView(
@@ -90,7 +90,7 @@ class LockerReservationPage extends StatelessWidget {
             const SizedBox(height: 30),
             const Text(
               '¿Necesitas ayuda con tu reserva?',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 5),
@@ -99,11 +99,11 @@ class LockerReservationPage extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'Contáctanos en ',
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                   TextSpan(
                     text: 'soporte@lockergo.com',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF0a4c86)),
+                    style: TextStyle(fontSize: 16, color: Color(0xFF0a4c86)),
                   ),
                 ],
               ),

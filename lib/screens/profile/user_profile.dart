@@ -9,6 +9,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -17,7 +20,7 @@ class ProfilePage extends StatelessWidget {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/header.png'), 
+              image: AssetImage('assets/images/header.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -25,7 +28,7 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: const SingleChildScrollView(
@@ -33,9 +36,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             ProfileSection(),
-
             ReservationsSection(),
-
             LocationSection(),
           ],
         ),

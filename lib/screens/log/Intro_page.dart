@@ -25,7 +25,7 @@ class IntroPage extends StatelessWidget {
                     'Gestiona y reserva tu locker universitario fácilmente.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 22,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),

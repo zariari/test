@@ -6,8 +6,11 @@ class LockerReservationPromptPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F9FF), 
+      backgroundColor: const Color(0xFFF1F9FF),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -15,24 +18,25 @@ class LockerReservationPromptPage extends StatelessWidget {
             children: [
               ClipRect(
                 child: Transform.translate(
-                  offset: const Offset(0, 0), 
+                  offset: const Offset(0, 0),
                   child: SizedBox(
                     width: double.infinity,
                     child: Image.asset(
                       'assets/images/upper_image.png',
                       fit: BoxFit.cover,
+                      height: screenHeight * 0.3, // Dynamic image height
                     ),
                   ),
                 ),
               ),
               Positioned(
-                top: 60,
+                top: screenHeight * 0.05, // Position the logo based on screen height
                 left: 0,
                 right: 0,
                 child: Center(
                   child: Image.asset(
-                    'assets/images/logo.png', 
-                    height: 130, 
+                    'assets/images/logo.png',
+                    height: screenHeight * 0.15, // Dynamic logo size
                   ),
                 ),
               ),
@@ -40,7 +44,7 @@ class LockerReservationPromptPage extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.10), // Dynamic padding
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -50,13 +54,13 @@ class LockerReservationPromptPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFFf39200), 
+                      color: Color(0xFFf39200),
                     ),
                   ),
                   const SizedBox(height: 20),
                   Image.asset(
-                    'assets/images/calendar_icon.png', 
-                    height: 250,
+                    'assets/images/calendar_icon.png',
+                    height: screenHeight * 0.25, // Dynamic icon size
                     fit: BoxFit.contain,
                   ),
                 ],
@@ -65,7 +69,7 @@ class LockerReservationPromptPage extends StatelessWidget {
           ),
           // Next Button Section
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            padding: EdgeInsets.symmetric(vertical: screenHeight * 0.03), // Dynamic padding
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
@@ -75,7 +79,7 @@ class LockerReservationPromptPage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFf39200),
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.15, vertical: 12), // Dynamic button padding
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -94,8 +98,9 @@ class LockerReservationPromptPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Image.asset(
-              'assets/images/lower_image.png', 
+              'assets/images/lower_image.png',
               fit: BoxFit.cover,
+              height: screenHeight * 0.15, // Dynamic footer image size
             ),
           ),
         ],

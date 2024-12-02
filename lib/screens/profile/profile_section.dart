@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lockergo/screens/log/login.dart';
 import 'package:lockergo/screens/profile/user_edit.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileSection extends StatelessWidget {
   const ProfileSection({super.key});
@@ -65,7 +67,7 @@ class ProfileSection extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
               },
               child: const Text(
                 'Cancelar',
@@ -81,7 +83,7 @@ class ProfileSection extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
@@ -100,8 +102,13 @@ class ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(screenWidth * 0.05),
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -113,16 +120,36 @@ class ProfileSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Tu perfil',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: screenHeight * 0.030,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
               Row(
                 children: [
+GestureDetector(
+  onTap: () {
+    themeProvider.toggleTheme(); // Toggle the theme
+  },
+  child: Container(
+    decoration: BoxDecoration(
+      color: themeProvider.isDarkMode ?  Colors.white: Colors.black, // White background for dark mode, black for light mode
+      shape: BoxShape.circle,
+    ),
+    padding: const EdgeInsets.all(8),
+    child: Icon(
+      themeProvider.isDarkMode
+          ? Icons.wb_sunny // Sun icon for light mode
+          : Icons.nightlight_round, // Moon icon for dark mode
+      color: themeProvider.isDarkMode ? Colors.black: Colors.white, // Black icon for dark mode, white for light mode
+    ),
+  ),
+),
+const SizedBox(width: 5),
+
                   GestureDetector(
                     onTap: () => _showDeleteConfirmation(context),
                     child: Container(
@@ -134,9 +161,9 @@ class ProfileSection extends StatelessWidget {
                       child: const Icon(Icons.delete, color: Colors.white),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 5),
                   GestureDetector(
-                    onTap: () => _navigateToEditProfilePage(context), 
+                    onTap: () => _navigateToEditProfilePage(context),
                     child: Container(
                       decoration: const BoxDecoration(
                         color: Colors.orange,
@@ -146,7 +173,7 @@ class ProfileSection extends StatelessWidget {
                       child: const Icon(Icons.edit, color: Colors.white),
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 5),
                   GestureDetector(
                     onTap: () => _logout(context),
                     child: Container(
@@ -158,6 +185,7 @@ class ProfileSection extends StatelessWidget {
                       child: const Icon(Icons.power_settings_new, color: Colors.white),
                     ),
                   ),
+                  const SizedBox(width: 5),
                 ],
               ),
             ],
@@ -166,7 +194,7 @@ class ProfileSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(4), 
+                padding: const EdgeInsets.all(4),
                 child: const CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.black,
@@ -174,23 +202,23 @@ class ProfileSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 15),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Nombre Apellido',
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
+                      fontSize: screenHeight * 0.018,
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
                     'Cédula',
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,                      
+                      fontSize: screenHeight * 0.018,
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],

@@ -111,13 +111,13 @@ Cada usuario tiene derecho a realizar una sola modificación a su reserva de loc
 El usuario es responsable del uso adecuado del locker reservado. LockerGO no se hace responsable de la pérdida, daño o robo de artículos almacenados en los lockers. Es responsabilidad del usuario cancelar o modificar su reserva en caso de que ya no necesite el locker.
 
 6. Duración de las Reservas: 
-Cada reserva tiene una duración predefinida, que coincide con el semestre académico en curso. Al finalizar el periodo de reserva, el usuario deberá liberar el locker y LockerGO enviará notificaciones antes de la expiración de la reserva.
+Cada reserva tiene una duración predefinida, que coincide con el semestre académico en curso. Al finalizar el periodo de reserva, el usuario deberá liberar el locker.
 
 7. Cancelación de Reservas: 
 El usuario puede cancelar su reserva en cualquier momento a través de la aplicación. Una vez cancelada, el locker quedará disponible para otros usuarios.
 
 8. Privacidad: 
-LockerGO recopila y almacena información personal del usuario de manera segura. No compartimos la información personal con terceros sin el consentimiento del usuario, excepto en los casos requeridos por ley. Para más detalles, consulte nuestra Política de Privacidad.
+LockerGO recopila y almacena información personal del usuario de manera segura. No compartimos la información personal con terceros sin el consentimiento del usuario, excepto en los casos requeridos por ley.
 
 9. Cambios en los Términos y Condiciones: 
 LockerGO se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Los cambios serán notificados a los usuarios a través de la aplicación, y su uso continuo de la misma implica la aceptación de dichas modificaciones.
@@ -125,10 +125,7 @@ LockerGO se reserva el derecho de modificar estos Términos y Condiciones en cua
 10. Propiedad Intelectual: 
 Todos los contenidos y materiales presentes en LockerGO, incluyendo diseño, logotipo, textos e imágenes, son propiedad exclusiva de LockerGO y están protegidos por las leyes de propiedad intelectual. Queda prohibida su reproducción sin autorización previa.
 
-11. Limitación de Responsabilidad: 
-LockerGO no se responsabiliza por interrupciones en el servicio, pérdida de datos o cualquier daño resultante del uso de la aplicación. El uso de LockerGO es bajo el propio riesgo del usuario.
-
-12. Contacto: 
+11. Contacto: 
 Para cualquier pregunta o soporte relacionado con la aplicación, el usuario puede ponerse en contacto a través del correo electrónico: soporte@lockergo.com.
 ''',
                     style: TextStyle(fontSize: 16, color: Colors.black),

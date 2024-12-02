@@ -55,6 +55,9 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -71,19 +74,19 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust logo size
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05, vertical: 10), // Dynamic padding
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Center(
               child: Text(
                 ' ${widget.floorNumber} de la facultad de ${widget.facultyName}',
-                style: const TextStyle(
-                  fontSize: 22,
+                style: TextStyle(
+                  fontSize: screenHeight * 0.03, // Dynamically adjust font size
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -91,14 +94,26 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            const Center(
-              child: Text(
-                '¿Qué sección es la adecuada para ti?',
-                style: TextStyle(fontSize: 17, color: Colors.black),
-                textAlign: TextAlign.center,
-              ),
+
+            // Row with Text and Tooltip icon next to it
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Center the content
+              children: [
+                Text(
+                  'Selecciona la sección',
+                  style: TextStyle(fontSize: 18, color: Colors.black),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(width: 8), // Small space between text and icon
+                Tooltip(
+                  message: "Cada piso está organizado en secciones para facilitar tu elección.",
+                  child: Icon(Icons.info, color: Colors.blue, size: 25), // Info icon
+                ),
+              ],
             ),
+
             const SizedBox(height: 20),
+
             isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : Expanded(
@@ -117,7 +132,7 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
                                 facultyName: widget.facultyName,
                                 floorNumber: widget.floorNumber,
                                 sectionName: section['section_name'],
-                                sectionId: section['id'], // Pasar el ID de la sección
+                                sectionId: section['id'], // Pass sectionId from API
                               );
                             },
                           ),
@@ -146,8 +161,10 @@ class SectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1, vertical: 8), // Dynamic padding
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

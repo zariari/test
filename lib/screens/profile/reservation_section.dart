@@ -57,7 +57,7 @@ class ReservationsSection extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
               },
               child: const Text(
                 'Cancelar',
@@ -73,8 +73,8 @@ class ReservationsSection extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); 
-                _showSuccessModal(context); 
+                Navigator.of(context).pop();
+                _showSuccessModal(context);
               },
               child: const Text(
                 'Continuar',
@@ -121,7 +121,7 @@ class ReservationsSection extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
               },
               child: const Text(
                 'Cerrar',
@@ -134,10 +134,49 @@ class ReservationsSection extends StatelessWidget {
     );
   }
 
+void _showQRDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true, // Allow tapping outside to close the dialog
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Muestra el código QR en tu asociación de facultad para realizar el pago',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Image.asset(
+                'assets/images/qr_code_sample.png', // Replace with your QR code image path
+                fit: BoxFit.contain,
+                height: MediaQuery.of(context).size.height * 0.3, // Adjust height dynamically
+                width: MediaQuery.of(context).size.width * 0.6, // Adjust width dynamically
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.all(screenWidth * 0.05),
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -149,10 +188,10 @@ class ReservationsSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Tus reservas',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: screenHeight * 0.030, // Dynamically adjust font size
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -188,12 +227,12 @@ class ReservationsSection extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.02), // Dynamic padding
             decoration: BoxDecoration(
-              color: const Color(0xFF0a4c86), 
+              color: const Color(0xFF0a4c86),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
@@ -202,37 +241,40 @@ class ReservationsSection extends StatelessWidget {
                     Text(
                       'Número del Locker',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: screenHeight * 0.018, // Dynamically adjust font size
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       'Estado de Reserva',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: screenHeight * 0.018,
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       'Periodo',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: screenHeight * 0.018,
                         color: Colors.white,
                       ),
                     ),
                     Text(
                       'Ubicación',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: screenHeight * 0.018,
                         color: Colors.white,
                       ),
                     ),
                   ],
                 ),
-                Icon(
-                  Icons.qr_code,
-                  size: 85,
-                  color: Colors.white,
+                GestureDetector(
+                  onTap: () => _showQRDialog(context), // Show the enlarged QR code dialog
+                  child: Icon(
+                    Icons.qr_code,
+                    size: screenHeight * 0.1, // Dynamically adjust icon size
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

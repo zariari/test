@@ -117,6 +117,9 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true, 
@@ -133,14 +136,14 @@ class EditProfilePage extends StatelessWidget {
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo_name_black.png',
-          height: 30,
+          height: screenHeight * 0.04, // Dynamically adjust the logo size
         ),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            padding: const EdgeInsets.all(20),
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: EdgeInsets.all(screenWidth * 0.05), // Dynamic padding
+            margin: EdgeInsets.only(left: screenWidth * 0.05, right: screenWidth * 0.05, top: screenHeight * 0.02), // Dynamic margins
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.black, width: 2),
@@ -149,11 +152,11 @@ class EditProfilePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Text(
                     'Tu perfil',
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: screenHeight * 0.030, // Dynamically adjust font size
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -172,14 +175,13 @@ class EditProfilePage extends StatelessWidget {
                   child: Text(
                     'Cédula',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                
                 const Text(
                   'Nombre Apellido:',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
@@ -242,7 +244,7 @@ class EditProfilePage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 123, 123, 123),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08, vertical: screenHeight * 0.010), // Adjusted padding
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -259,7 +261,7 @@ class EditProfilePage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF0a4c86),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.08, vertical: screenHeight * 0.010),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

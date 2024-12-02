@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   http: ^1.2.2
   meta: ^1.15.0
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +39,4 @@ flutter:
     - assets/images/onboarding_image.png
     - assets/images/calendar_icon.png
     - assets/images/map.png
+    - assets/images/qr_code_sample.png
