@@ -1,0 +1,40 @@
+name: lockergo
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.2
+  meta: ^1.15.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.14.1
+  flutter_lints: ^4.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/lockergo_logo_name.png
+    - assets/images/logo.png
+    - assets/images/upper_image.png
+    - assets/images/lower_image.png
+    - assets/images/header.png
+    - assets/images/locker_image.png
+    - assets/images/logo_name.png
+    - assets/images/logo_name_black.png
+    - assets/images/onboarding_image.png
+    - assets/images/calendar_icon.png
+    - assets/images/map.png
