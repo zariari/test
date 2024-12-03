@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lockergo/custom_bottom_navigation_bar.dart';
 import 'package:lockergo/screens/lockers/locker.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class SectionSelectionScreen extends StatefulWidget {
   final String facultyName;
@@ -39,7 +41,7 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          sections = data; // Guardar la lista de secciones desde la API
+          sections = data; 
           isLoading = false;
         });
       } else {
@@ -57,6 +59,8 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
 
     return Scaffold(
       appBar: AppBar(
@@ -88,7 +92,7 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
                 style: TextStyle(
                   fontSize: screenHeight * 0.03, // Dynamically adjust font size
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -106,7 +110,7 @@ class _SectionSelectionScreenState extends State<SectionSelectionScreen> {
                 ),
                 SizedBox(width: 8), // Small space between text and icon
                 Tooltip(
-                  message: "Cada piso está organizado en secciones para facilitar tu elección.",
+                  message: "Cada piso está organizado en secciones para facilitar tu elección, cada sección incluye 16 lockers en el orden que está viendo abajo.",
                   child: Icon(Icons.info, color: Colors.blue, size: 25), // Info icon
                 ),
               ],
@@ -161,6 +165,8 @@ class SectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
@@ -168,8 +174,12 @@ class SectionTile extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Color(0xFF0a4c86), width: 2.0),
+          side: BorderSide(
+            color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
+            width: 2.0,
+          ),
         ),
+        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Background color for night mode
         child: ListTile(
           onTap: () {
             Navigator.push(
@@ -187,10 +197,10 @@ class SectionTile extends StatelessWidget {
           title: Center(
             child: Text(
               sectionName,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0a4c86),
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
               ),
             ),
           ),

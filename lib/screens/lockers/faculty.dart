@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lockergo/custom_bottom_navigation_bar.dart';
 import 'package:lockergo/screens/lockers/floor.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class FacultyScreen extends StatefulWidget {
   const FacultyScreen({super.key});
@@ -89,6 +91,8 @@ class _FacultyScreenState extends State<FacultyScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -113,13 +117,13 @@ class _FacultyScreenState extends State<FacultyScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Center(
+            Center(
               child: Text(
                 'Selecciona la Facultad',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, // Night mode color
                 ),
               ),
             ),
@@ -135,6 +139,12 @@ class _FacultyScreenState extends State<FacultyScreen> {
                         prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+                          ),
+                        ),
+                        hintStyle: TextStyle(
+                          color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
                         ),
                       ),
                     )
@@ -179,14 +189,17 @@ class FacultyTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(
-          color: Color(0xFF0a4c86),
+        side: BorderSide(
+          color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
           width: 2.0,
         ),
       ),
+      color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Box background color
       child: ListTile(
         onTap: () {
           Navigator.push(
@@ -204,10 +217,10 @@ class FacultyTile extends StatelessWidget {
           children: [
             Text(
               facultyName,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0a4c86),
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
               ),
               softWrap: true,
             ),
@@ -222,7 +235,10 @@ class FacultyTile extends StatelessWidget {
             ),
           ],
         ),
-        trailing: const Icon(Icons.arrow_forward, color: Color(0xFF0a4c86)),
+        trailing: Icon(
+          Icons.arrow_forward,
+          color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
+        ),
       ),
     );
   }

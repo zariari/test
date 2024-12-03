@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lockergo/screens/lockers/faculty.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class ReservationsSection extends StatelessWidget {
   const ReservationsSection({super.key});
@@ -16,6 +18,7 @@ class ReservationsSection extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           contentPadding: const EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
@@ -92,6 +95,7 @@ class ReservationsSection extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           contentPadding: const EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
@@ -134,44 +138,46 @@ class ReservationsSection extends StatelessWidget {
     );
   }
 
-void _showQRDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    barrierDismissible: true, // Allow tapping outside to close the dialog
-    builder: (BuildContext context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          width: double.infinity,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Muestra el código QR en tu asociación de facultad para realizar el pago',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              Image.asset(
-                'assets/images/qr_code_sample.png', // Replace with your QR code image path
-                fit: BoxFit.contain,
-                height: MediaQuery.of(context).size.height * 0.3, // Adjust height dynamically
-                width: MediaQuery.of(context).size.width * 0.6, // Adjust width dynamically
-              ),
-            ],
+  void _showQRDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true, // Allow tapping outside to close the dialog
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.white, 
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
-        ),
-      );
-    },
-  );
-}
-
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Muestra el código QR en tu asociación de facultad para realizar el pago',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color:  Color.fromARGB(255, 0, 0, 0)),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Image.asset(
+                  'assets/images/qr_code_sample.png', // Replace with your QR code image path
+                  fit: BoxFit.contain,
+                  height: MediaQuery.of(context).size.height * 0.3, // Adjust height dynamically
+                  width: MediaQuery.of(context).size.width * 0.6, // Adjust width dynamically
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -180,7 +186,11 @@ void _showQRDialog(BuildContext context) {
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2),
+        border: Border.all(
+          color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color.fromARGB(255, 0, 0, 0), // Blue border
+          width: 2,
+        ),
+        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Background color in night mode
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +203,7 @@ void _showQRDialog(BuildContext context) {
                 style: TextStyle(
                   fontSize: screenHeight * 0.030, // Dynamically adjust font size
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Color.fromARGB(255, 0, 0, 0), // Blue for normal mode and white for night mode
                 ),
               ),
               Row(
@@ -229,7 +239,7 @@ void _showQRDialog(BuildContext context) {
           Container(
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: screenHeight * 0.02), // Dynamic padding
             decoration: BoxDecoration(
-              color: const Color(0xFF0a4c86),
+              color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue background
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -242,28 +252,28 @@ void _showQRDialog(BuildContext context) {
                       'Número del Locker',
                       style: TextStyle(
                         fontSize: screenHeight * 0.018, // Dynamically adjust font size
-                        color: Colors.white,
+                        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Blue background
                       ),
                     ),
                     Text(
                       'Estado de Reserva',
                       style: TextStyle(
                         fontSize: screenHeight * 0.018,
-                        color: Colors.white,
+                        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Blue background
                       ),
                     ),
                     Text(
                       'Periodo',
                       style: TextStyle(
                         fontSize: screenHeight * 0.018,
-                        color: Colors.white,
+                        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Blue background
                       ),
                     ),
                     Text(
                       'Ubicación',
                       style: TextStyle(
                         fontSize: screenHeight * 0.018,
-                        color: Colors.white,
+                        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Blue background
                       ),
                     ),
                   ],
@@ -273,7 +283,7 @@ void _showQRDialog(BuildContext context) {
                   child: Icon(
                     Icons.qr_code,
                     size: screenHeight * 0.1, // Dynamically adjust icon size
-                    color: Colors.white,
+                    color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Blue background
                   ),
                 ),
               ],

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lockergo/custom_bottom_navigation_bar.dart';
 import 'package:lockergo/screens/lockers/section.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class FloorSelectionScreen extends StatefulWidget {
   final int facultyId; // Cambiar a ID de la facultad
@@ -58,6 +60,8 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -88,7 +92,7 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
                 style: TextStyle(
                   fontSize: screenHeight * 0.03, // Dynamic font size
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -146,6 +150,8 @@ class FloorTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
@@ -153,8 +159,12 @@ class FloorTile extends StatelessWidget {
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Color(0xFF0a4c86), width: 2.0),
+          side: BorderSide(
+            color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
+            width: 2.0,
+          ),
         ),
+        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Background color for night mode
         child: ListTile(
           onTap: () {
             Navigator.push(
@@ -171,10 +181,10 @@ class FloorTile extends StatelessWidget {
           title: Center(
             child: Text(
               floorNumber,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF0a4c86),
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
               ),
             ),
           ),

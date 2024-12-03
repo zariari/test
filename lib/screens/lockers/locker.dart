@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lockergo/custom_bottom_navigation_bar.dart';
 import 'package:lockergo/screens/profile/user_profile.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class LockerSelectionScreen extends StatefulWidget {
   final String facultyName;
@@ -61,6 +63,8 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -85,13 +89,13 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Center(
+            Center(
               child: Text(
                 'Selecciona tu Locker',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
                 ),
               ),
             ),
@@ -102,7 +106,7 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
               style: TextStyle(
                 fontSize: screenHeight * 0.025, // Dynamically adjust font size
                 fontWeight: FontWeight.bold,
-                color: const Color(0xFF0a4c86),
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), // Blue for night mode
               ),
               textAlign: TextAlign.center,
             ),
@@ -138,7 +142,7 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
             const SizedBox(height: 10),
             RichText(
               textAlign: TextAlign.center,
-              text: const TextSpan(
+              text: TextSpan(
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.black,
@@ -147,24 +151,38 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
                 children: [
                   TextSpan(
                     text: 'Lockers en ',
+                    style: TextStyle(
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+                    ),
                   ),
                   TextSpan(
                     text: 'verde',
-                    style: TextStyle(color: Colors.green), // Green color for available lockers
+                    style: TextStyle(
+                      color: themeProvider.isDarkMode ? Colors.green : Colors.green, // Green for night mode and normal mode
+                    ),
                   ),
                   TextSpan(
                     text: ' están disponibles \n Lockers en ',
+                    style: TextStyle(
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+                    ),
                   ),
                   TextSpan(
                     text: 'gris',
-                    style: TextStyle(color: Colors.grey), // Gray color for reserved lockers
+                    style: TextStyle(
+                      color: themeProvider.isDarkMode ? Colors.grey : Colors.grey, // Gray for night mode and normal mode
+                    ),
                   ),
                   TextSpan(
                     text: ' ya están reservados',
+                    style: TextStyle(
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+                    ),
                   ),
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
           ],
         ),
@@ -190,6 +208,8 @@ class LockerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return GestureDetector(
       onTap: () {
         if (isAvailable) {
@@ -204,7 +224,7 @@ class LockerTile extends StatelessWidget {
               ? const Color.fromARGB(255, 96, 206, 100)
               : const Color.fromARGB(255, 150, 145, 145),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: const Color(0xFF0a4c86), width: 2.0),
+          border: Border.all(color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86), width: 2.0), // Blue for borders in night mode
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
@@ -219,7 +239,7 @@ class LockerTile extends StatelessWidget {
             style: TextStyle(
               fontSize: screenWidth * 0.065, // Dynamically adjust font size
               fontWeight: FontWeight.w900,
-              color: const Color(0xFF0a4c86),
+              color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Color(0xFF0a4c86), // Blue for locker number in night mode
             ),
           ),
         ),
@@ -232,6 +252,7 @@ class LockerTile extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -259,7 +280,7 @@ class LockerTile extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 123, 123, 123),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -274,7 +295,7 @@ class LockerTile extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0a4c86),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -299,6 +320,7 @@ class LockerTile extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           content: const Column(
             mainAxisSize: MainAxisSize.min,
@@ -342,6 +364,7 @@ class LockerTile extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           content: const Column(
             mainAxisSize: MainAxisSize.min,

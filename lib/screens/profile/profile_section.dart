@@ -26,6 +26,7 @@ class ProfileSection extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white, 
           contentPadding: const EdgeInsets.all(20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
@@ -112,7 +113,11 @@ class ProfileSection extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2),
+        border: Border.all(
+          color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color.fromARGB(255, 0, 0, 0), // Blue border
+          width: 2,
+        ),
+        color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Colors.white, // Background color in night mode
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,31 +130,31 @@ class ProfileSection extends StatelessWidget {
                 style: TextStyle(
                   fontSize: screenHeight * 0.030,
                   fontWeight: FontWeight.bold,
-                  color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                  color: themeProvider.isDarkMode ? Colors.white : Color.fromARGB(255, 0, 0, 0), // Blue for normal mode and white for night mode
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end, // Align icons to the right
                 children: [
-GestureDetector(
-  onTap: () {
-    themeProvider.toggleTheme(); // Toggle the theme
-  },
-  child: Container(
-    decoration: BoxDecoration(
-      color: themeProvider.isDarkMode ?  Colors.white: Colors.black, // White background for dark mode, black for light mode
-      shape: BoxShape.circle,
-    ),
-    padding: const EdgeInsets.all(8),
-    child: Icon(
-      themeProvider.isDarkMode
-          ? Icons.wb_sunny // Sun icon for light mode
-          : Icons.nightlight_round, // Moon icon for dark mode
-      color: themeProvider.isDarkMode ? Colors.black: Colors.white, // Black icon for dark mode, white for light mode
-    ),
-  ),
-),
-const SizedBox(width: 5),
-
+                  GestureDetector(
+                    onTap: () {
+                      themeProvider.toggleTheme(); // Toggle the theme
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White background for dark mode, black for light mode
+                        shape: BoxShape.circle,
+                      ),
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        themeProvider.isDarkMode
+                            ? Icons.wb_sunny // Sun icon for light mode
+                            : Icons.nightlight_round, // Moon icon for dark mode
+                        color: themeProvider.isDarkMode ? Colors.black : Colors.white, // Black icon for dark mode, white for light mode
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 5),
                   GestureDetector(
                     onTap: () => _showDeleteConfirmation(context),
                     child: Container(
@@ -175,15 +180,18 @@ const SizedBox(width: 5),
                   ),
                   const SizedBox(width: 5),
                   GestureDetector(
-                    onTap: () => _logout(context),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF0a4c86),
-                        shape: BoxShape.circle,
-                      ),
-                      padding: const EdgeInsets.all(8),
-                      child: const Icon(Icons.power_settings_new, color: Colors.white),
+                  onTap: () => _logout(context),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color(0xFF0a4c86),
+                      shape: BoxShape.circle,
                     ),
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.power_settings_new,
+                      color: themeProvider.isDarkMode ? Colors.black : Colors.white, // Black icon for night mode
+                    ),
+                  ),
                   ),
                   const SizedBox(width: 5),
                 ],
@@ -195,10 +203,10 @@ const SizedBox(width: 5),
             children: [
               Container(
                 padding: const EdgeInsets.all(4),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.black,
-                  child: Icon(Icons.person, color: Colors.white, size: 35),
+                  backgroundColor: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color.fromARGB(255, 0, 0, 0), // Background color for the icon in night mode
+                  child: Icon(Icons.person, color: themeProvider.isDarkMode ? Color(0xFF0a4c86) : Color.fromARGB(255, 255, 255, 255), size: 35), // Person icon color in night mode
                 ),
               ),
               const SizedBox(width: 15),
@@ -209,7 +217,7 @@ const SizedBox(width: 5),
                     'Nombre Apellido',
                     style: TextStyle(
                       fontSize: screenHeight * 0.018,
-                      color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                      color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color.fromARGB(255, 0, 0, 0), // Blue for normal mode and white for night mode
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -217,7 +225,7 @@ const SizedBox(width: 5),
                     'Cédula',
                     style: TextStyle(
                       fontSize: screenHeight * 0.018,
-                      color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                      color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Color.fromARGB(255, 0, 0, 0), // Blue for normal mode and white for night mode
                       fontWeight: FontWeight.w500,
                     ),
                   ),

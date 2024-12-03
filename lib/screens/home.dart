@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lockergo/custom_bottom_navigation_bar.dart';
 import 'package:lockergo/screens/lockers/faculty.dart';
+import 'package:lockergo/screens/theme_provider.dart';
+import 'package:provider/provider.dart';
+
 
 class LockerReservationPage extends StatelessWidget {
   const LockerReservationPage({super.key});
@@ -11,6 +14,8 @@ class LockerReservationPage extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     
+    final themeProvider = Provider.of<ThemeProvider>(context); // Access the theme provider
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -36,16 +41,24 @@ class LockerReservationPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            const Center(
+            Center(
               child: Text(
                 'Bienvenido Nombre',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: themeProvider.isDarkMode ? Colors.white : Colors.black, // Night mode color
+                ),
               ),
             ),
             const SizedBox(height: 30),
-            const Text(
+            Text(
               'Reservar tu\nLocker Universitario',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Colors.black, // Blue for night mode
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
@@ -55,17 +68,28 @@ class LockerReservationPage extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 30),
-            const Text(
+            Text(
               'Total Lockers',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) :  Colors.black, // Blue for night mode
+              ),
             ),
-            const Text(
+            Text(
               '1200',
-              style: TextStyle(fontSize: 68, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 68,
+                fontWeight: FontWeight.bold,
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) :  Colors.black, // Blue for night mode
+              ),
             ),
-            const Text(
+            Text(
               'Periodo Academica 2024-2025',
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: TextStyle(
+                fontSize: 16,
+                color: themeProvider.isDarkMode ? Color(0xFF9de9ff) :  Colors.black, // Blue for night mode
+              ),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -76,7 +100,7 @@ class LockerReservationPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFf39200), 
+                backgroundColor: const Color(0xFFf39200),
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1, vertical: 10), // Dynamic padding based on screen width
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
@@ -88,22 +112,32 @@ class LockerReservationPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            const Text(
+            Text(
               '¿Necesitas ayuda con tu reserva?',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 5),
-            const Text.rich(
+            Text.rich(
               TextSpan(
                 children: [
                   TextSpan(
                     text: 'Contáctanos en ',
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: themeProvider.isDarkMode ? Colors.white : Colors.black, // White for night mode
+                    ),
                   ),
                   TextSpan(
                     text: 'soporte@lockergo.com',
-                    style: TextStyle(fontSize: 16, color: Color(0xFF0a4c86)),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: themeProvider.isDarkMode ? Color(0xFFf39200) : Color(0xFF0a4c86), // Orange for night mode
+                    ),
                   ),
                 ],
               ),
