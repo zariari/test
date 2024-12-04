@@ -138,7 +138,7 @@ class _LockerSelectionScreenState extends State<LockerSelectionScreen> {
                     ),
                   ),
             const SizedBox(height: 10),
-            const Divider(color: Colors.black, thickness: 5),
+            Divider(color: themeProvider.isDarkMode ? Color(0xFF9de9ff) : Colors.black, thickness: 5),
             const SizedBox(height: 10),
             RichText(
               textAlign: TextAlign.center,
@@ -266,7 +266,7 @@ class LockerTile extends StatelessWidget {
                   children: [
                     const TextSpan(text: 'Has seleccionado el locker '),
                     TextSpan(
-                      text: '$section-$lockerNumber',
+                      text: '$lockerNumber',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const TextSpan(text: '.\nPor favor, confirma tu reserva.'),

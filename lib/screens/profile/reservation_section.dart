@@ -28,7 +28,7 @@ class ReservationsSection extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: const Icon(Icons.thumb_up, color: Colors.orange, size: 50),
+                child: const Icon(Icons.delete, color: Colors.red, size: 50),
               ),
               RichText(
                 textAlign: TextAlign.center,
@@ -199,7 +199,7 @@ class ReservationsSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Tus reservas',
+                'Tu reserva',
                 style: TextStyle(
                   fontSize: screenHeight * 0.030, // Dynamically adjust font size
                   fontWeight: FontWeight.bold,

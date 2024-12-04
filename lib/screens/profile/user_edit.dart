@@ -336,7 +336,7 @@ class EditProfilePage extends StatelessWidget {
                         style: TextStyle(
                         fontSize: 18,
                         color: themeProvider.isDarkMode
-                                ? const Color.fromARGB(255, 0, 0, 0)
+                                ? const Color.fromARGB(255, 255, 255, 255)
                                 : const Color.fromARGB(255, 255, 255, 255)),    
                         ),
                     ),

@@ -98,10 +98,10 @@ class _FloorSelectionScreenState extends State<FloorSelectionScreen> {
               ),
             ),
             const SizedBox(height: 5),
-            const Center(
+            Center(
               child: Text(
                 'Selecciona el piso',
-                style: TextStyle(fontSize: 18, color: Colors.black),
+                style: TextStyle(fontSize: 18, color: themeProvider.isDarkMode ? Color(0xFFFFA500)  : Colors.black),
                 textAlign: TextAlign.center,
               ),
             ),

@@ -36,7 +36,7 @@ class ProfileSection extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: const Icon(Icons.thumb_up, color: Colors.orange, size: 50),
+                child: const Icon(Icons.sentiment_dissatisfied, color: Colors.orange, size: 50),
               ),
               RichText(
                 textAlign: TextAlign.center,
